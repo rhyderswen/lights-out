@@ -1,0 +1,24 @@
+.tileWrapper {
+  padding: 8px;
+  margin: 0.5rem auto;
+}
+
+.tile {
+  display: inline-block;
+  width: 5rem;
+  height: 5rem;
+  color: white;
+  border-radius: 8px;
+  border: 1px solid #646cff;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.lightTile {
+  background-color: white;
+}
+
+.darkTile {
+  background-color: #1a1a1a;
+}
