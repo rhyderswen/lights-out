@@ -12,10 +12,17 @@ const GameArea = ({ incrementMoves }: IGameArea) => {
   const [tileStates, setTileStates] = useState<Array<boolean>>([]);
   function flipTile(row: number, column: number) {
     incrementMoves();
-    console.log(tileStates);
     const clicked = row*columns + column;
     const updatedTiles = tileStates.map((state, i) => {
       if (i === clicked) {
+        return !state;
+      } else if (clicked % columns !== 0 && i+1 === clicked) { // Switch left square if it the clicked square isn't on the left edge
+        return !state;
+      } else if (clicked % columns !== 6 && i-1 === clicked) { // Switch right square if it the clicked square isn't on the right edge
+        return !state;
+      } else if (clicked / columns >= 1 && i+columns === clicked) { // Switch upper square if it the clicked square isn't on the top edge
+        return !state;
+      } else if (clicked / columns < rows-1 && i-columns === clicked) { // Switch lower square if it the clicked square isn't on the bottom edge
         return !state;
       } else {
         return state;
