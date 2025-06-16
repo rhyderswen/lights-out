@@ -1,10 +1,11 @@
 import './Header.css';
 
 interface IHeader {
-  moves: number
+  moves: number,
+  reset: () => void
 }
 
-const Header = ({ moves }: IHeader) => {
+const Header = ({ moves, reset }: IHeader) => {
 
   return (
     <div className="header">
@@ -12,6 +13,7 @@ const Header = ({ moves }: IHeader) => {
       <div className="scoreBox">
           {moves} move{moves === 1 ? "" : "s"}
       </div>
+      <button className="resetButton" onClick={reset}>Reset</button>
     </div>
   )
 }
