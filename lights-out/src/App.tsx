@@ -2,14 +2,18 @@ import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/Header';
 import GameArea from './components/GameArea';
+import ConfettiExplosion from 'react-confetti-explosion';
+import Popup from 'reactjs-popup';
 
 function App() {
+  const [confettiActive, setConfettiActive] = useState(false);
+  const [openWinPopup, setOpenWinPopup] = useState(false);
   const [moves, setMoves] = useState(0);
   function incrementMoves() {
     setMoves(moves + 1);
   }
   
-  const columns = 7;
+  const columns = 5;
   const rows = 5;
   const [tileStates, setTileStates] = useState<Array<boolean>>([]);
   function flipTile(row: number, column: number) {
@@ -31,6 +35,7 @@ function App() {
       }
     });
     setTileStates(updatedTiles);
+    checkForWin(updatedTiles);
   }
 
   const randomizeTiles = useCallback(() => {
@@ -50,8 +55,31 @@ function App() {
     randomizeTiles();
   }
 
+  function closeAndReset() {
+    reset();
+    setOpenWinPopup(false);
+  }
+
+  function checkForWin(tiles: boolean[]) {
+    if (tiles.every(state => !state)) {
+      setConfettiActive(false);
+      setTimeout(() => setConfettiActive(true), 0);
+      setOpenWinPopup(true);
+    }
+  }
+
   return (
     <>
+      {confettiActive && <ConfettiExplosion className='confetti' onComplete={() => setConfettiActive(false)}/>}
+      <Popup open={openWinPopup} closeOnDocumentClick onClose={() => setOpenWinPopup(false)}>
+        <div className="winPopup">
+          You won with {moves} moves! Congrats!
+          <div className="popupButtons">
+            <button className="button resetButton" onClick={closeAndReset}>Reset</button>
+            <button className="button closeButton" onClick={() => setOpenWinPopup(false)}>Close</button>
+          </div>
+        </div>
+      </Popup>
       <Header moves={moves} reset={reset}/>
       <hr className="seperator"/>
       <GameArea rows={rows} columns={columns} tileStates={tileStates} flipTile={flipTile}/>

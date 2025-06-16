@@ -13,7 +13,7 @@ const Header = ({ moves, reset }: IHeader) => {
       <div className="scoreBox">
           {moves} move{moves === 1 ? "" : "s"}
       </div>
-      <button className="resetButton" onClick={reset}>Reset</button>
+      <button className="button resetButton" onClick={reset}>Reset</button>
     </div>
   )
 }

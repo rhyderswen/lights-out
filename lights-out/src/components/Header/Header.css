@@ -1,3 +1,7 @@
+h1 {
+  margin: 16px;
+}
+
 .scoreBox {
   border-radius: 8px;
   border: 1px solid #646cff;
@@ -7,28 +11,6 @@
   font-family: inherit;
   background-color: #1a1a1a;
   width: fit-content;
-  margin: 0 8px;
+  margin: 8px;
   display: inline;
-}
-
-.resetButton {
-  border-radius: 8px;
-  border: 1px solid #646cff;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  width: fit-content;
-  margin: 0 8px;
-  cursor: grab;
-  transition: border-color 0.15s ease-in-out;
-  -webkit-transition: border-color 0.15s ease-in-out;
-  -moz-transition: border-color 0.15s ease-in-out;
-  -ms-transition: border-color 0.15s ease-in-out;
-  -o-transition: border-color 0.15s ease-in-out;
-}
-
-.resetButton:hover {
-  border-color: #ff4744;
 }

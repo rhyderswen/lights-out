@@ -4,3 +4,58 @@
   padding: 0.5rem;
   text-align: center;
 }
+
+.confetti {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+}
+
+.winPopup {
+  background-color: #213547;
+  padding: 16px;
+  font-size: 1.5rem;
+  text-align: center;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 80%;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+}
+
+.popupButtons {
+  padding: 8px 0 0 0;
+}
+
+.popup-overlay {
+	background: rgba(0,0,0,.5);
+  z-index: auto !important;
+}
+
+.button {
+  border-radius: 8px;
+  border: 1px solid #646cff;
+  padding: 0.6em 1.2em;
+  font-size: inherit;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  width: fit-content;
+  margin: 8px;
+  cursor: grab;
+  transition: border-color 0.15s ease-in-out;
+  -webkit-transition: border-color 0.15s ease-in-out;
+  -moz-transition: border-color 0.15s ease-in-out;
+  -ms-transition: border-color 0.15s ease-in-out;
+  -o-transition: border-color 0.15s ease-in-out;
+}
+
+.resetButton:hover {
+  border-color: #ff4744;
+}
+
+.closeButton:hover {
+  border-color: #de83ff;
+}
