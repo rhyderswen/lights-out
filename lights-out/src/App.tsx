@@ -13,7 +13,7 @@ function App() {
     setMoves(moves + 1);
   }
   
-  const columns = 5;
+  const columns = 5; // Note: Valid solution checking is only implemented for 5x5. There will be errors if this is changed
   const rows = 5;
   const [tileStates, setTileStates] = useState<Array<boolean>>([]);
   function flipTile(row: number, column: number) {
@@ -38,13 +38,41 @@ function App() {
     checkForWin(updatedTiles);
   }
 
+  const checkIfSolvable = useCallback((arr: boolean[])  => {
+    const n1 = [0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0]; // from "Turning Lights Out with Linear Algebra" by Marlow Anderson and Todd Feil
+    const n2 = [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1];
+
+    function dotProduct(a: number[], b: number[]) {
+      if (a.length !== b.length) {
+        console.error("Tried to do dot product on vectors of different length!");
+        return NaN;
+      }
+      let sum = 0;
+      for (let i = 0; i < a.length; i++) {
+        sum += a[i] * b[i];
+      }
+      return sum;
+    }
+
+    const numArr = arr.map(state => +state);
+      console.log(numArr);
+    if (dotProduct(numArr, n1) % 2 === 0 && dotProduct(numArr, n2) % 2 === 0) {
+      console.log("solvable!\n");
+      return true;
+    }
+      console.log("not solvable!\n");
+    return false;
+  }, []);
+
   const randomizeTiles = useCallback(() => {
     const arr = Array(rows*columns);
-    for (let i = 0; i < rows*columns; i++) {
-      arr[i] = Boolean(Math.round(Math.random())); // Generates a random boolean
-    }
+    do {
+      for (let i = 0; i < rows*columns; i++) {
+        arr[i] = Boolean(Math.round(Math.random())); // Generates a random boolean
+      }
+    } while (!checkIfSolvable(arr));
     setTileStates(arr);
-  }, []);
+  }, [checkIfSolvable]);
   
   useEffect(() => {
     randomizeTiles();
