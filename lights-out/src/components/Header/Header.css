@@ -14,3 +14,12 @@ h1 {
   margin: 8px;
   display: inline;
 }
+
+@media (prefers-color-scheme: light) {
+  h1 {
+    color: #213547;
+  }
+  .scoreBox {
+    color: white;
+  }
+}

@@ -15,10 +15,6 @@
   font-family: inherit;
   cursor: grab;
   transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-  -webkit-transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-  -moz-transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-  -ms-transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-  -o-transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
 }
 
 .tile:hover {
