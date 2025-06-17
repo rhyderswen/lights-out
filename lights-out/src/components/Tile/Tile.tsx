@@ -1,16 +1,14 @@
 import "./Tile.css";
 
 interface ITile {
-  state: boolean,
-  row: number,
-  column: number,
-  flipTile: (row: number, column: number) => void
+  isLit: boolean,
+  onClick: () => void
 }
 
-const Tile = ({ state, row, column, flipTile }: ITile) => {
+const Tile = ({ isLit, onClick }: ITile) => {
   return (
     <span className="tileWrapper">
-      <button className={"tile " + (state ? "lightTile" : "darkTile")} onClick={() => flipTile(row, column)} /> 
+      <button className={"tile " + (isLit ? "lightTile" : "darkTile")} onClick={onClick} /> 
     </span>
   )
 }

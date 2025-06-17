@@ -13,7 +13,7 @@ const GameArea = ({ rows, columns, tileStates, flipTile }: IGameArea) => {
 
   return (
     <div className="tileContainer" style={{gridTemplateColumns: "1fr ".repeat(columns), maxWidth: columns*120}}>
-      {[...Array(columns*rows)].map((_, i) => <Tile state={tileStates[i]} row={Math.floor(i/columns)} column={i%columns} key={i} flipTile={flipTile} />)}
+      {[...Array(columns*rows)].map((_, i) => <Tile isLit={tileStates[i]} onClick={() => flipTile(Math.floor(i/columns), i%columns)} key={i}/>)}
     </div>
   )
 }
