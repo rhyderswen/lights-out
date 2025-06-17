@@ -24,7 +24,7 @@ function App() {
         return !state;
       } else if (clicked % columns !== 0 && i+1 === clicked) { // Switch left square if it the clicked square isn't on the left edge
         return !state;
-      } else if (clicked % columns !== 6 && i-1 === clicked) { // Switch right square if it the clicked square isn't on the right edge
+      } else if (clicked % columns !== columns-1 && i-1 === clicked) { // Switch right square if it the clicked square isn't on the right edge
         return !state;
       } else if (clicked / columns >= 1 && i+columns === clicked) { // Switch upper square if it the clicked square isn't on the top edge
         return !state;
