@@ -40,34 +40,40 @@ function App() {
     setTileStates(updatedTiles);
   }
 
-  const checkIfSolvable = useCallback((arr: boolean[]) => {
-    const n1 = [
-      0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0,
-    ]; // from "Turning Lights Out with Linear Algebra" by Marlow Anderson and Todd Feil
-    const n2 = [
-      1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
-    ];
-
-    function dotProduct(a: number[], b: number[]) {
-      if (a.length !== b.length) {
-        console.error(
-          "Tried to do dot product on vectors of different length!"
-        );
-        return NaN;
-      }
-      let sum = 0;
-      for (let i = 0; i < a.length; i++) {
-        sum += a[i] * b[i];
-      }
-      return sum;
+  const dotProduct = useCallback((a: number[], b: number[]) => {
+    if (a.length !== b.length) {
+      console.error("Tried to do dot product on vectors of different length!");
+      return NaN;
     }
-
-    const numArr = arr.map((state) => +state);
-    if (dotProduct(numArr, n1) % 2 === 0 && dotProduct(numArr, n2) % 2 === 0) {
-      return true;
+    let sum = 0;
+    for (let i = 0; i < a.length; i++) {
+      sum += a[i] * b[i];
     }
-    return false;
+    return sum;
   }, []);
+
+  const checkIfSolvable = useCallback(
+    (arr: boolean[]) => {
+      const n1 = [
+        0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1,
+        0,
+      ]; // from "Turning Lights Out with Linear Algebra" by Marlow Anderson and Todd Feil
+      const n2 = [
+        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0,
+        1,
+      ];
+
+      const numArr = arr.map((state) => +state);
+      if (
+        dotProduct(numArr, n1) % 2 === 0 &&
+        dotProduct(numArr, n2) % 2 === 0
+      ) {
+        return true;
+      }
+      return false;
+    },
+    [dotProduct]
+  );
 
   const randomizeTiles = useCallback(() => {
     const arr = Array(rows * columns);
@@ -80,6 +86,7 @@ function App() {
   }, [checkIfSolvable]);
 
   useEffect(() => {
+    // Randomize tiles on page load
     randomizeTiles();
   }, [randomizeTiles]);
 

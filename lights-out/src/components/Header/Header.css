@@ -9,7 +9,7 @@ h1 {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #383838;
+  background-color: var(--dark-gray);
   width: fit-content;
   margin: 8px;
   display: inline;
@@ -17,9 +17,6 @@ h1 {
 
 @media (prefers-color-scheme: light) {
   h1 {
-    color: #383838;
-  }
-  .scoreBox {
-    color: white;
+    color: var(--dark-gray);
   }
 }

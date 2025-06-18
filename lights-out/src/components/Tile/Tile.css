@@ -7,7 +7,6 @@
   display: inline-block;
   width: 5rem;
   height: 5rem;
-  color: white;
   border-radius: 8px;
   border: 0px;
   font-size: 1em;
@@ -22,11 +21,9 @@
 }
 
 .lightTile {
-  background-color: #c6c6c6;
-  /* background-color: #dfdfdf; */
-  /* background-color: #ffdfa9; */
+  background-color: var(--light-gray);
 }
 
 .darkTile {
-  background-color: #383838;
+  background-color: var(--dark-gray);
 }

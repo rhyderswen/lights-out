@@ -12,7 +12,7 @@
 }
 
 .winPopup {
-  background-color: #242424;
+  background-color: var(--dark-background);
   padding: 16px;
   font-size: 1.5rem;
   text-align: center;
@@ -36,7 +36,7 @@
   font-size: inherit;
   font-weight: 500;
   font-family: inherit;
-  background-color: #383838;
+  background-color: var(--dark-gray);
   width: fit-content;
   margin: 8px;
   cursor: grab;
@@ -49,6 +49,6 @@
 
 @media (prefers-color-scheme: light) {
   #root, .winPopup, .button {
-    color: white;
+    color: var(--light-background);
   }
 }
