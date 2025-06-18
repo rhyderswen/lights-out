@@ -6,8 +6,7 @@ import ConfettiExplosion from "react-confetti-explosion";
 import Popup from "reactjs-popup";
 
 function App() {
-  const [confettiActive, setConfettiActive] = useState(false);
-  const [openWinPopup, setOpenWinPopup] = useState(false);
+  const [hasWon, setHasWon] = useState(false);
   const [moves, setMoves] = useState(0);
   function incrementMoves() {
     setMoves(moves + 1);
@@ -39,7 +38,6 @@ function App() {
       }
     });
     setTileStates(updatedTiles);
-    checkForWin(updatedTiles);
   }
 
   const checkIfSolvable = useCallback((arr: boolean[]) => {
@@ -86,47 +84,27 @@ function App() {
   }, [randomizeTiles]);
 
   function reset() {
+    setHasWon(false);
     setMoves(0);
     randomizeTiles();
   }
 
-  function closeAndReset() {
-    reset();
-    setOpenWinPopup(false);
-  }
-
-  function checkForWin(tiles: boolean[]) {
-    if (tiles.every((state) => !state)) {
-      setConfettiActive(false);
-      setTimeout(() => setConfettiActive(true), 0);
-      setOpenWinPopup(true);
+  useEffect(() => {
+    if (moves > 1 && tileStates.every((state) => !state)) {
+      setHasWon(true);
     }
-  }
+  }, [moves, tileStates]);
 
   return (
     <>
-      {confettiActive && (
-        <ConfettiExplosion
-          className="confetti"
-          onComplete={() => setConfettiActive(false)}
-        />
-      )}
-      <Popup
-        open={openWinPopup}
-        closeOnDocumentClick
-        onClose={() => setOpenWinPopup(false)}
-      >
+      <button onClick={() => setHasWon(true)}>Trigger Win</button>
+      {hasWon && <ConfettiExplosion className="confetti" />}
+      <Popup open={hasWon} closeOnDocumentClick onClose={reset}>
         <div className="winPopup">
           You won with {moves} moves! Congrats!
           <div className="popupButtons">
-            <button className="button resetButton" onClick={closeAndReset}>
+            <button className="button resetButton" onClick={reset}>
               Reset
-            </button>
-            <button
-              className="button closeButton"
-              onClick={() => setOpenWinPopup(false)}
-            >
-              Close
             </button>
           </div>
         </div>
