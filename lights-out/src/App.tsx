@@ -65,12 +65,9 @@ function App() {
     }
 
     const numArr = arr.map((state) => +state);
-    console.log(numArr);
     if (dotProduct(numArr, n1) % 2 === 0 && dotProduct(numArr, n2) % 2 === 0) {
-      console.log("solvable!\n");
       return true;
     }
-    console.log("not solvable!\n");
     return false;
   }, []);
 

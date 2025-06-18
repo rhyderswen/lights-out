@@ -14,7 +14,7 @@ const GameArea = ({ rows, columns, tileStates, flipTile }: IGameArea) => {
       className="tileContainer"
       style={{
         gridTemplateColumns: "1fr ".repeat(columns),
-        maxWidth: columns * 120,
+        maxWidth: columns * 100,
       }}
     >
       {[...Array(columns * rows)].map((_, i) => (

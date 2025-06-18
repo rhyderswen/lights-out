@@ -1,6 +1,6 @@
 .tileWrapper {
   padding: 8px;
-  margin: 0.5rem auto;
+  margin: auto;
 }
 
 .tile {
@@ -9,22 +9,24 @@
   height: 5rem;
   color: white;
   border-radius: 8px;
-  border: 1px solid #646cff;
+  border: 0px;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   cursor: grab;
-  transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out;
 }
 
 .tile:hover {
-  border-color: #de83ff;
+  transform: scale(1.1);
 }
 
 .lightTile {
-  background-color: white;
+  background-color: #c6c6c6;
+  /* background-color: #dfdfdf; */
+  /* background-color: #ffdfa9; */
 }
 
 .darkTile {
-  background-color: #1a1a1a;
+  background-color: #383838;
 }

@@ -12,7 +12,7 @@
 }
 
 .winPopup {
-  background-color: #213547;
+  background-color: #242424;
   padding: 16px;
   font-size: 1.5rem;
   text-align: center;
@@ -31,24 +31,20 @@
 
 .button {
   border-radius: 8px;
-  border: 1px solid #646cff;
+  border: 0px;
   padding: 0.6em 1.2em;
   font-size: inherit;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #383838;
   width: fit-content;
   margin: 8px;
   cursor: grab;
-  transition: border-color 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
 }
 
-.resetButton:hover {
-  border-color: #ff4744;
-}
-
-.closeButton:hover {
-  border-color: #de83ff;
+.button:hover {
+  transform: scale(1.1);
 }
 
 @media (prefers-color-scheme: light) {
