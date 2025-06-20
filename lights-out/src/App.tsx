@@ -5,6 +5,32 @@ import GameArea from "./components/GameArea";
 import ConfettiExplosion from "react-confetti-explosion";
 import Popup from "reactjs-popup";
 
+function dotProduct(a: Array<number>, b: Array<number>) {
+  if (a.length !== b.length) {
+    console.error("Tried to do dot product on vectors of different length!");
+    return NaN;
+  }
+  let sum = 0;
+  for (let i = 0; i < a.length; i++) {
+    sum += a[i] * b[i];
+  }
+  return sum;
+}
+
+const n1 = [
+  0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0,
+]; // from "Turning Lights Out with Linear Algebra" by Marlow Anderson and Todd Feil
+const n2 = [
+  1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
+];
+function checkIfSolvable(arr: boolean[]) {
+  const numArr = arr.map((state) => +state);
+  if (dotProduct(numArr, n1) % 2 === 0 && dotProduct(numArr, n2) % 2 === 0) {
+    return true;
+  }
+  return false;
+}
+
 function App() {
   const [hasWon, setHasWon] = useState(false);
   const [moves, setMoves] = useState(0);
@@ -40,41 +66,6 @@ function App() {
     setTileStates(updatedTiles);
   }
 
-  const dotProduct = useCallback((a: number[], b: number[]) => {
-    if (a.length !== b.length) {
-      console.error("Tried to do dot product on vectors of different length!");
-      return NaN;
-    }
-    let sum = 0;
-    for (let i = 0; i < a.length; i++) {
-      sum += a[i] * b[i];
-    }
-    return sum;
-  }, []);
-
-  const checkIfSolvable = useCallback(
-    (arr: boolean[]) => {
-      const n1 = [
-        0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1,
-        0,
-      ]; // from "Turning Lights Out with Linear Algebra" by Marlow Anderson and Todd Feil
-      const n2 = [
-        1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0,
-        1,
-      ];
-
-      const numArr = arr.map((state) => +state);
-      if (
-        dotProduct(numArr, n1) % 2 === 0 &&
-        dotProduct(numArr, n2) % 2 === 0
-      ) {
-        return true;
-      }
-      return false;
-    },
-    [dotProduct],
-  );
-
   const randomizeTiles = useCallback(() => {
     const arr = Array(rows * columns);
     do {
@@ -83,7 +74,7 @@ function App() {
       }
     } while (!checkIfSolvable(arr));
     setTileStates(arr);
-  }, [checkIfSolvable]);
+  }, []);
 
   useEffect(() => {
     // Randomize tiles on page load
