@@ -1,9 +1,35 @@
-import { useCallback, useEffect, useState } from 'react';
-import './App.css';
-import Header from './components/Header';
-import GameArea from './components/GameArea';
-import ConfettiExplosion from 'react-confetti-explosion';
-import Popup from 'reactjs-popup';
+import { useCallback, useEffect, useState } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import GameArea from "./components/GameArea";
+import ConfettiExplosion from "react-confetti-explosion";
+import Popup from "reactjs-popup";
+
+function dotProduct(a: Array<number>, b: Array<number>) {
+  if (a.length !== b.length) {
+    console.error("Tried to do dot product on vectors of different length!");
+    return NaN;
+  }
+  let sum = 0;
+  for (let i = 0; i < a.length; i++) {
+    sum += a[i] * b[i];
+  }
+  return sum;
+}
+
+const n1 = [
+  0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0,
+]; // from "Turning Lights Out with Linear Algebra" by Marlow Anderson and Todd Feil
+const n2 = [
+  1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
+];
+function checkIfSolvable(arr: boolean[]) {
+  const numArr = arr.map((state) => +state);
+  if (dotProduct(numArr, n1) % 2 === 0 && dotProduct(numArr, n2) % 2 === 0) {
+    return true;
+  }
+  return false;
+}
 
 function App() {
   const [hasWon, setHasWon] = useState(false);
@@ -12,7 +38,7 @@ function App() {
     setMoves(moves + 1);
   }
 
-  const columns = 5;
+  const columns = 5; // Note: Valid solution checking is only implemented for 5x5. There will be errors if this is changed
   const rows = 5;
   const [tileStates, setTileStates] = useState<Array<boolean>>([]);
   function flipTile(row: number, column: number) {
@@ -42,13 +68,16 @@ function App() {
 
   const randomizeTiles = useCallback(() => {
     const arr = Array(rows * columns);
-    for (let i = 0; i < rows * columns; i++) {
-      arr[i] = Boolean(Math.round(Math.random())); // Generates a random boolean
-    }
+    do {
+      for (let i = 0; i < rows * columns; i++) {
+        arr[i] = Boolean(Math.round(Math.random())); // Generates a random boolean
+      }
+    } while (!checkIfSolvable(arr));
     setTileStates(arr);
   }, []);
 
   useEffect(() => {
+    // Randomize tiles on page load
     randomizeTiles();
   }, [randomizeTiles]);
 

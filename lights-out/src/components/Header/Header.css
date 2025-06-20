@@ -4,12 +4,12 @@ h1 {
 
 .scoreBox {
   border-radius: 8px;
-  border: 1px solid #646cff;
+  border: 0px;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--dark-gray);
   width: fit-content;
   margin: 8px;
   display: inline;
@@ -17,9 +17,6 @@ h1 {
 
 @media (prefers-color-scheme: light) {
   h1 {
-    color: #213547;
-  }
-  .scoreBox {
-    color: white;
+    color: var(--dark-gray);
   }
 }

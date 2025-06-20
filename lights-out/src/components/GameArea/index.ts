@@ -1,3 +1,3 @@
-import GameArea from './GameArea';
+import GameArea from "./GameArea";
 
 export default GameArea;
