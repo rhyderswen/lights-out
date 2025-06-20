@@ -26,7 +26,7 @@
 }
 
 .popup-overlay {
-	background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .button {
@@ -48,7 +48,9 @@
 }
 
 @media (prefers-color-scheme: light) {
-  #root, .winPopup, .button {
+  #root,
+  .winPopup,
+  .button {
     color: var(--light-background);
   }
 }

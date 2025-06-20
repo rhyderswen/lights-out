@@ -13,7 +13,9 @@
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  transition:
+    transform 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
 }
 
 .tile:hover {
@@ -21,12 +23,12 @@
 }
 
 .lightTile {
-    background-color: var(--light-on);
-  }
+  background-color: var(--light-on);
+}
 
-  .darkTile {
-    background-color: var(--light-off);
-  }
+.darkTile {
+  background-color: var(--light-off);
+}
 
 @media (prefers-color-scheme: light) {
   .lightTile {

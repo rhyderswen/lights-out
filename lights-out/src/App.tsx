@@ -72,7 +72,7 @@ function App() {
       }
       return false;
     },
-    [dotProduct]
+    [dotProduct],
   );
 
   const randomizeTiles = useCallback(() => {
