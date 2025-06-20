@@ -4,8 +4,8 @@
   --light-gray: #c6c6c6;
   --dark-gray: #383838;
   --dark-background: #242424;
-  --light-on: rgba(230, 200, 64, 0.9);
-  --light-off: rgba(216, 210, 120, 0.3);
+  --light-on: var(--light-gray);
+  --light-off: var(--dark-gray);
 }
 
 @media (prefers-color-scheme: light) {
