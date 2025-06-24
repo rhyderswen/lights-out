@@ -96,12 +96,18 @@ function App() {
   return (
     <>
       <button onClick={() => setHasWon(true)}>Trigger Win</button>
-      {hasWon && <ConfettiExplosion className="confetti" />}
+      {hasWon && (
+        <ConfettiExplosion className="confetti" data-testid="confetti" />
+      )}
       <Popup open={hasWon} closeOnDocumentClick onClose={reset}>
         <div className="winPopup">
           You won with {moves} moves! Congrats!
           <div className="popupButtons">
-            <button className="button resetButton" onClick={reset}>
+            <button
+              className="button resetButton"
+              onClick={reset}
+              data-testid="winReset"
+            >
               Reset
             </button>
           </div>
