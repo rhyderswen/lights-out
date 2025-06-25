@@ -6,6 +6,7 @@ import ConfettiExplosion from "react-confetti-explosion";
 import Popup from "reactjs-popup";
 
 function dotProduct(a: Array<number>, b: Array<number>) {
+  /* v8 ignore next 4 */
   if (a.length !== b.length) {
     console.error("Tried to do dot product on vectors of different length!");
     return NaN;
@@ -96,12 +97,18 @@ function App() {
   return (
     <>
       <button onClick={() => setHasWon(true)}>Trigger Win</button>
-      {hasWon && <ConfettiExplosion className="confetti" />}
+      {hasWon && (
+        <ConfettiExplosion className="confetti" data-testid="confetti" />
+      )}
       <Popup open={hasWon} closeOnDocumentClick onClose={reset}>
         <div className="winPopup">
           You won with {moves} moves! Congrats!
           <div className="popupButtons">
-            <button className="button resetButton" onClick={reset}>
+            <button
+              className="button resetButton"
+              onClick={reset}
+              data-testid="winReset"
+            >
               Reset
             </button>
           </div>

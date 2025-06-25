@@ -11,6 +11,8 @@ const Tile = ({ isLit, onClick }: ITile) => {
       <button
         className={"tile " + (isLit ? "lightTile" : "darkTile")}
         onClick={onClick}
+        data-testid="tile"
+        data-islit={isLit}
       />
     </span>
   );
