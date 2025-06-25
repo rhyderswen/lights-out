@@ -6,6 +6,7 @@ import ConfettiExplosion from "react-confetti-explosion";
 import Popup from "reactjs-popup";
 
 function dotProduct(a: Array<number>, b: Array<number>) {
+  /* v8 ignore next 4 */
   if (a.length !== b.length) {
     console.error("Tried to do dot product on vectors of different length!");
     return NaN;

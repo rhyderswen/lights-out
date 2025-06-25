@@ -12,7 +12,7 @@ function getTileStates() {
     .map((tile) => tile.getAttribute("data-islit") === "true");
 }
 
-function flipStates(states: string[], toFlip: number[]) {
+function flipStates(states: boolean[], toFlip: number[]) {
   return states.map((state, i) => (toFlip.includes(i) ? !state : state));
 }
 
@@ -212,9 +212,11 @@ describe("App", () => {
         user.click(tiles[i]);
       }
     });
+
     expect(await screen.findByText(/you won/i)).toBeInTheDocument();
     expect(screen.getByTestId("confetti")).toBeInTheDocument();
   });
+
   it("displays the correct amount of moves in win screen", async () => {
     render(<App />);
     user.click(screen.getAllByTestId("tile")[0]);
@@ -223,11 +225,13 @@ describe("App", () => {
       await screen.findByText(/you won with 1 moves/i),
     ).toBeInTheDocument(); // surely nobody will win in just 1 move and I don't need to remove the s...
   });
+
   it("shuffles the board and clears the win screen when reset is clicked", async () => {
     render(<App />);
     const initialStates = getTileStates();
     user.click(screen.getAllByTestId("tile")[0]);
     user.click(screen.getByText(/trigger win/i));
+
     await screen.findByTestId("winReset");
     user.click(screen.getByTestId("winReset"));
 
