@@ -6,19 +6,14 @@ import { gfMatrixGaussian } from "../util/gauss";
 import Matrix from "ml-matrix";
 
 function getTileStates() {
+  console.log(screen.getAllByTestId("tile")[0].getAttribute("data-islit"));
   return screen
     .getAllByTestId("tile")
-    .map((tile) => tile.className.split(" ")[1]);
+    .map((tile) => tile.getAttribute("data-islit") === "true");
 }
 
 function flipStates(states: string[], toFlip: number[]) {
-  return states.map((state, i) =>
-    toFlip.includes(i) ? flipState(state) : state,
-  );
-}
-
-function flipState(state: string) {
-  return state === "lightTile" ? "darkTile" : "lightTile";
+  return states.map((state, i) => (toFlip.includes(i) ? !state : state));
 }
 
 describe("Rendering", () => {
@@ -209,9 +204,7 @@ describe("App", () => {
   it("is solvable and win screen appears", async () => {
     render(<App />);
     const initialStates = getTileStates();
-    const initalStatesBinary = initialStates.map((state) =>
-      state === "lightTile" ? 1 : 0,
-    );
+    const initalStatesBinary = initialStates.map((state) => (state ? 1 : 0));
     const solution = generateSolutions(initalStatesBinary);
     const tiles = screen.getAllByTestId("tile");
     solution.forEach((toClick, i) => {
